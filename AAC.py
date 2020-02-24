@@ -8,13 +8,13 @@ password = "xxxxx"
 
 #访问教务系统,前面分析过了，提交数据时要用这个值。先得到__VIEWSTATE的值。
 s = requests.session()
-url = "http://218.6.163.93/default2.aspx"
+url = "http://xxxx/default2.aspx"
 response = s.get(url)
 selector = etree.HTML(response.content)
 __VIEWSTATE = selector.xpath('//*[@id="form1"]/input/@value')[0]
 
 #获取验证码并下载到本地
-imgUrl = "http://218.6.163.93/CheckCode.aspx?"
+imgUrl = "http://xxxx/CheckCode.aspx?"
 imgresponse = s.get(imgUrl, stream=True)
 cooker=s.cookies#获取每一次登陆教务系统的cookies
 print (s.cookies)#cookies检验端口
@@ -55,19 +55,19 @@ print(response.text)#登陆成功检验端口
 #获取成绩，gardeurl是课表页面url,为什么有个Referer参数,这个参数代表你是从哪里来的。就是登录后的主界面参数。这个一定要有。
 
 head={
-'Host':'218.6.163.93',
+'Host':'xxxxx',
 'Connection':'keep-alive',
 'Upgrade-Insecure-Requests':'1',
 'User-Agent':'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36',
 'Accept':'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
-'Referer':'http://218.6.163.93/xs_main.aspx?xh=201517120096',
+'Referer':'http://xxxxxx/xs_main.aspx?xh=xxxxxx',
 'Accept-Encoding': 'gzip, deflate, sdch',
 'Accept-Language': 'zh-CN,zh;q=0.8',
 #'Cookie':'ASP.NET_SessionId=ky4vhczmhhzxs2455ossex55',#最开始我用的是固定的cookies所以出现大量问题，最后我使用了自动获取才解决
 }
 
 
-gardeurl = "http://218.6.163.93/xscj.aspx?xh=201517120096&xm=%BA%FA%B3%CC%EE%DA&gnmkdm=N121604"#成绩页面的地址，其中xh为学号，xm为密码，gnmkdm为成绩页面的代码
+gardeurl = "http://xxxxxxx/xscj.aspx?xh=xxxxx&xm=xxxx&gnmkdm=N121604"#成绩页面的地址，其中xh为学号，xm为密码，gnmkdm为成绩页面的代码
 
 #向成绩页面post的表单数据，包含—VIEWSTATE页面状态，txtQSCJ为，Button2为在校学习成绩查询按钮，后面为按钮提交的值
 formdata = {
@@ -84,10 +84,10 @@ header = {
 'Connection':'Keep-Alive',
 'Content-Length':'1461',
 'Content-Type':'application/x-www-form-urlencoded',
-'Host':'218.6.163.93',
-'Referer':'http://218.6.163.93/xscj.aspx?xh=201517120096&xm=%BA%FA%B3%CC%EE%DA&gnmkdm=N121604',
+'Host':'xxxxxxx',
+'Referer':'http://xxxxxx/xscj.aspx?xh=xxxxx&xm=xxxxx&gnmkdm=N121604',
 'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.79 Safari/537.36 Edge/14.14393',
-'Origin':'http://218.6.163.93',
+'Origin':'http://xxxxxx',
 'Upgrade-Insecure-Requests':'1',
 'Accept-Language':'zh-CN,zh;q=0.8',
 'Accept':'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
