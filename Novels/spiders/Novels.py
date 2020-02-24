@@ -6,11 +6,11 @@ from Novels.items import NovelsItem#导入刚才定义好的字段
 
 class Myspider(scrapy.Spider):
     name = 'Novels'
-    bash_url = 'http://www.x23us.com'
+    bash_url = 'http://www.xxxx.com'
     bashurl = '.html'
 
     def start_requests(self):
-        yield Request('http://www.x23us.com/quanben/1', self.parse)
+        yield Request('http://www.xxxs.com/quanben/1', self.parse)
     def parse(self, response):
         max_num = BeautifulSoup(response.text, 'lxml').find('div', class_='pagelink').find_all('a')[-1].get_text()#获取最大页码
         for num in range(1, int(max_num)):
